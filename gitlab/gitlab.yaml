@@ -106,20 +106,3 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: gitlab-pvc
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: gitlab
-  namespace: jenkins
-  labels:
-    name: gitlab
-spec:
-  ports:
-    - name: http
-      port: 80
-      targetPort: 80
-      nodeport: 32080
-  type: NodePort
-  selector:
-    name: gitlab
