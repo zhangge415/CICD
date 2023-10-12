@@ -50,6 +50,10 @@ spec:
               value: long-and-random-alpha-numeric-string
             - name: GITLAB_SECRETS_SECRET_KEY_BASE
               value: long-and-random-alpha-numeric-string
+            - name: GITLAB_SSH_HOST # 设置ssh host
+              value: "172.16.10.10"
+            - name: GITLAB_SSH_PORT # 设置 ssh port
+              value: "30022"
             - name: GITLAB_SECRETS_OTP_KEY_BASE
               value: long-and-random-alpha-numeric-string
             - name: GITLAB_ROOT_PASSWORD
@@ -115,6 +119,7 @@ spec:
     - name: http
       port: 80
       targetPort: 80
+      nodeport: 32080
   type: NodePort
   selector:
     name: gitlab
