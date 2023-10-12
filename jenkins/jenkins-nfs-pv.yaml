@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-pv
+  namespace: jenkins
+spec:
+  storageClassName: jenkins-volume
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    path: /var/lib/k8s/data/ #挂载目录
+    server: 172.16.10.10  #NFSf服务端
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jenkins-pvc
+  namespace: kube-ops
+spec:
+  storageClassName: jenkins-volume # 指定一个可用的 storageclass
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
